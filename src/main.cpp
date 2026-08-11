@@ -49,6 +49,12 @@ SPIClass epdSpi(HSPI);
 RTC_DATA_ATTR BoardData persisted;
 RTC_DATA_ATTR bool      hasPersistedData = false;
 
+// How many partial refreshes have run back to back. Colour e-paper leaves
+// residue when it is refreshed in a window, so this bounds the run before a
+// full refresh clears it. Lives in RTC memory for the same reason the board
+// does: it has to survive deep sleep to mean anything.
+RTC_DATA_ATTR uint8_t   partialChain = 0;
+
 namespace {
 
 bool clockIsSet()
@@ -117,15 +123,43 @@ bool inQuietHours(int hour)
     return hour >= QUIET_HOUR_START || hour < QUIET_HOUR_END;  // wraps midnight
 }
 
+// The hour the board is acted on rather than glanced at. Unlike quiet hours
+// this one never wraps midnight - a rush that started before midnight and
+// ended after it would be a different feature - so a plain range is enough.
+bool inRushHours(int hour)
+{
+    if (!RUSH_ENABLED) return false;
+    if (RUSH_HOUR_START >= RUSH_HOUR_END) return false;
+    return hour >= RUSH_HOUR_START && hour < RUSH_HOUR_END;
+}
+
+// Whether *now* is inside the rush window. Needs the clock: without it there
+// is no way to know, and guessing would mean refreshing every three minutes
+// around the clock.
+bool rushNow()
+{
+    if (!clockIsSet()) return false;
+    const time_t rawNow = time(nullptr);
+    struct tm local;
+    localtime_r(&rawNow, &local);
+    return inRushHours(local.tm_hour);
+}
+
 uint32_t secondsUntilNextWake(bool fetchSucceeded)
 {
-    const uint32_t interval = (uint32_t)(fetchSucceeded ? REFRESH_MINUTES : RETRY_MINUTES) * 60;
+    uint32_t interval = (uint32_t)(fetchSucceeded ? REFRESH_MINUTES : RETRY_MINUTES) * 60;
 
     if (!clockIsSet()) return interval;  // no clock, so no alignment to do
 
     const time_t rawNow = time(nullptr);
     struct tm local;
     localtime_r(&rawNow, &local);
+
+    // A successful fetch inside the rush window comes back on the fast
+    // cadence. A failed one keeps RETRY_MINUTES, which is already short.
+    if (fetchSucceeded && inRushHours(local.tm_hour)) {
+        interval = (uint32_t)RUSH_REFRESH_MINUTES * 60;
+    }
 
     if (inQuietHours(local.tm_hour)) {
         const int hoursUntilEnd = (QUIET_HOUR_END - local.tm_hour + 24) % 24;
@@ -163,9 +197,22 @@ void initDisplay()
     display.setRotation(DISPLAY_ROTATION);
 }
 
-void paint(const BoardData& data)
+// `topRegionOnly` redraws just the masthead and the two station blocks and
+// leaves the weather half of the panel exactly as it is. renderBoard() is
+// still called unchanged: GxEPD2 clips every write to the active window, so
+// the weather calls simply land nowhere. Keeping one render function is worth
+// the handful of wasted draw calls - two renderers that had to agree about a
+// boundary would drift the first time the layout moved.
+void paint(const BoardData& data, bool topRegionOnly = false)
 {
-    display.setFullWindow();
+    if (topRegionOnly) {
+        int16_t x, y, w, h;
+        rushRefreshRegion(x, y, w, h);
+        display.setPartialWindow(x, y, w, h);
+    } else {
+        display.setFullWindow();
+    }
+
     display.firstPage();
     do {
         renderBoard(display, data);
@@ -369,7 +416,22 @@ void setup()
         stampTimestamps(data);
     }
 
-    paint(data);
+    // A partial refresh is only worth taking when there is already a good board
+    // on the glass to leave the bottom half of, and only for a bounded run
+    // before a full one clears the residue. Outside the rush window the chain
+    // resets, so the first rush wake of the morning always starts from a fully
+    // refreshed panel.
+    const bool rush    = rushNow();
+    const bool partial = rush && hasPersistedData && partialChain < RUSH_MAX_PARTIAL_CHAIN;
+
+    if (partial) partialChain++;
+    else         partialChain = 0;
+
+    Serial.printf("[draw] %s refresh (rush %s, partial chain %u/%u)\n",
+                  partial ? "partial, top region" : "full frame",
+                  rush ? "yes" : "no", partialChain, (unsigned)RUSH_MAX_PARTIAL_CHAIN);
+
+    paint(data, partial);
 
     persisted        = data;
     hasPersistedData = true;

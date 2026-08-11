@@ -578,6 +578,14 @@ void renderBoard(Adafruit_GFX& g, const BoardData& data)
     drawFooter(g, data);
 }
 
+void rushRefreshRegion(int16_t& x, int16_t& y, int16_t& w, int16_t& h)
+{
+    x = 0;
+    y = 0;
+    w = BOARD_W;
+    h = NOW_Y;   // stops exactly where the weather panel starts
+}
+
 void renderMessage(Adafruit_GFX& g, const char* title, const char* detail)
 {
     g.fillScreen(C_WHITE);

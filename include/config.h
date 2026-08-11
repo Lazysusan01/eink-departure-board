@@ -107,6 +107,28 @@
 #define QUIET_HOUR_START       23         // inclusive, local time
 #define QUIET_HOUR_END         6          // exclusive
 
+// --- Morning rush ----------------------------------------------------------
+// The one hour of the day when the board is actually being acted on rather
+// than glanced at, so it is worth refreshing far more often than the rest of
+// the day can justify. Inside this window the board wakes every
+// RUSH_REFRESH_MINUTES and redraws only the top region - margin, masthead and
+// both station blocks - leaving the weather half of the panel undisturbed.
+//
+// Note this buys *calm*, not speed: a four-colour panel has no fast partial
+// update (GxEPD2 reports hasFastPartialUpdate = false and the same 20s for
+// both), so a partial refresh costs about what a full one does. What it saves
+// is the bottom half of the wall flashing twenty times an hour.
+#define RUSH_ENABLED           true
+#define RUSH_HOUR_START        7          // inclusive, local time
+#define RUSH_HOUR_END          8          // exclusive
+#define RUSH_REFRESH_MINUTES   3
+
+// Partial refreshes leave residue on colour e-paper, so one full refresh is
+// forced after this many consecutive partial ones - every 15 minutes at a
+// 3-minute cadence. Set to 1 to disable partial refreshes entirely and just
+// use the faster cadence.
+#define RUSH_MAX_PARTIAL_CHAIN 5
+
 // --- Time ------------------------------------------------------------------
 // POSIX TZ string. The default handles UK GMT/BST transitions automatically.
 #define TIMEZONE       "GMT0BST,M3.5.0/1,M10.5.0/2"

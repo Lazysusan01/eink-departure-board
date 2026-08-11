@@ -247,6 +247,48 @@ so the board is deliberately a slow appliance:
 - `RETRY_MINUTES` (default 3) after a failed fetch.
 - **Quiet hours** (default 23:00–06:00): no refreshes overnight. E-paper holds its last image
   at zero power, so the board still reads correctly — it just stops flashing at you.
+- **Morning rush** (default 07:00–08:00): `RUSH_REFRESH_MINUTES` (default **3**) instead, and
+  only the top region redraws. See below.
+
+### The morning rush window
+
+One hour a day the board is acted on rather than glanced at, and a 10-minute cadence is too
+slow for it. Inside `RUSH_HOUR_START`–`RUSH_HOUR_END` the board wakes every
+`RUSH_REFRESH_MINUTES`, still fetches (a delay appearing at 07:34 is the whole point), and
+redraws **only the region above the weather panel** — top margin, masthead, both station
+blocks — leaving the bottom 40% of the glass untouched.
+
+Be clear about what that buys, because it is not what "partial refresh" usually means. This
+panel reports:
+
+```
+hasPartialUpdate     = true
+hasFastPartialUpdate = false
+full_refresh_time    = 20000   // ms
+partial_refresh_time = 20000   // ms   ← the same
+```
+
+The fast, flicker-free partial update people associate with e-ink is a **monochrome-only**
+feature; driving four pigments runs the full waveform whatever the window size. So a partial
+refresh here costs about what a full one does. **What it buys is calm, not speed** — the
+weather half of the wall does not flash twenty times an hour.
+
+That is also why the region is one contiguous rectangle rather than two windows around the
+two hero rows: two partial refreshes would cost two refresh cycles, which is worse than one
+full one. And it has to include the masthead, because `Updated hh:mm` is precisely the field
+that goes stale — a board whose departures moved while its timestamp didn't would be worse
+than one that refreshed everything.
+
+Colour e-paper leaves residue when refreshed in a window, so `RUSH_MAX_PARTIAL_CHAIN`
+(default 5) forces a full refresh after that many consecutive partial ones — every 15 minutes
+at a 3-minute cadence. The chain resets outside the window, so each morning starts from a
+fully refreshed panel.
+
+> **If the top region ghosts**, set `RUSH_MAX_PARTIAL_CHAIN` to `1`. That keeps the
+> 3-minute cadence and does every refresh full — you lose the calm, not the freshness. The
+> interaction worth watching is that `hibernate()` puts the panel in deep sleep between
+> wakes, and GxEPD2 is reconstructed from scratch on each one, so the controller's
+> previous-image buffer is not what a partial refresh would normally assume.
 
 **Failure is partial, not total.** The last good board is kept in `RTC_DATA_ATTR` memory,
 which survives deep sleep. If only the train API is down, the weather half still updates and
