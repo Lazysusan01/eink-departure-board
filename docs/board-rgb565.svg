@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 960" width="640" height="960" role="img" aria-label="Rendered e-ink departure and weather board">
+<defs>
+    <pattern id="p50y" width="2" height="2" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#FFFF00"/>
+      <rect x="1" y="1" width="1" height="1" fill="#FFFF00"/></pattern>
+    <pattern id="p25y" width="2" height="2" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#FFFF00"/></pattern>
+    <pattern id="p12k" width="4" height="2" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#000000"/></pattern>
+  </defs>
+<rect x="0" y="0" width="640" height="960" fill="#FFFFFF"/>
+<rect x="0" y="0" width="640" height="72" fill="#FFFF00"/>
+<rect x="0" y="67" width="640" height="5" fill="#000000"/>
+<text x="26" y="48" fill="#000000" font-size="47" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Tuesday</text>
+<text x="231" y="48" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">11 August 2026</text>
+<text x="614" y="32" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">West Dulwich</text>
+<text x="614" y="58" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">05:40 - 20:31</text>
+<circle cx="468" cy="52" r="5.6000000000000005" fill="#000000"/>
+<line x1="475.6" y1="52" x2="478" y2="52" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="473.37401153701774" y1="57.37401153701776" x2="475.0710678118655" y2="59.071067811865476" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="468" y1="59.6" x2="468" y2="62" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="462.62598846298226" y1="57.374011537017765" x2="460.9289321881345" y2="59.071067811865476" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="460.4" y1="52" x2="458" y2="52" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="462.62598846298226" y1="46.62598846298224" x2="460.9289321881345" y2="44.928932188134524" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="468" y1="44.4" x2="468" y2="42" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="473.37401153701774" y1="46.625988462982235" x2="475.0710678118655" y2="44.928932188134524" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<rect x="26" y="78" width="588" height="26" fill="#000000"/>
+<text x="66" y="96" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">West Dulwich</text>
+<text x="600" y="96" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
+<rect x="39" y="81.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
+<rect x="42.08" y="85.06" width="15.84" height="6.1336" fill="#000000"/>
+<circle cx="44.72" cy="96.412" r="1.98" fill="#000000"/>
+<circle cx="55.28" cy="96.412" r="1.98" fill="#000000"/>
+<rect x="26" y="108" width="588" height="60" fill="#FFFF00"/>
+<rect x="26" y="108" width="588" height="3" fill="#000000"/>
+<rect x="26" y="165" width="588" height="3" fill="#000000"/>
+<rect x="26" y="108" width="3" height="60" fill="#000000"/>
+<rect x="611" y="108" width="3" height="60" fill="#000000"/>
+<text x="44" y="147" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:20</text>
+<text x="596" y="147" fill="#FF0000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">1 min</text>
+<text x="158" y="145" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Victoria</text>
+<rect x="26" y="172" width="588" height="48" fill="url(#p12k)"/>
+<text x="44" y="203" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:50</text>
+<text x="596" y="203" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="203" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<text x="44" y="251" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:20</text>
+<text x="596" y="251" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="251" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<rect x="26" y="268" width="588" height="48" fill="url(#p12k)"/>
+<text x="44" y="299" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:50</text>
+<text x="596" y="299" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="299" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<rect x="26" y="328" width="588" height="26" fill="#000000"/>
+<text x="66" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Tulse Hill</text>
+<text x="600" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
+<rect x="39" y="331.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
+<rect x="42.08" y="335.06" width="15.84" height="6.1336" fill="#000000"/>
+<circle cx="44.72" cy="346.412" r="1.98" fill="#000000"/>
+<circle cx="55.28" cy="346.412" r="1.98" fill="#000000"/>
+<rect x="26" y="358" width="588" height="60" fill="#FFFF00"/>
+<rect x="26" y="358" width="588" height="3" fill="#000000"/>
+<rect x="26" y="415" width="588" height="3" fill="#000000"/>
+<rect x="26" y="358" width="3" height="60" fill="#000000"/>
+<rect x="611" y="358" width="3" height="60" fill="#000000"/>
+<text x="44" y="397" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:32</text>
+<text x="596" y="397" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">12 min</text>
+<text x="158" y="395" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Bridge</text>
+<rect x="26" y="422" width="588" height="36" fill="url(#p12k)"/>
+<text x="44" y="447" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:47</text>
+<text x="596" y="447" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="447" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<text x="44" y="483" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:02</text>
+<text x="596" y="483" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="483" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<rect x="26" y="494" width="588" height="36" fill="url(#p12k)"/>
+<text x="44" y="519" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:17</text>
+<text x="596" y="519" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="519" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<text x="44" y="555" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:32</text>
+<text x="596" y="555" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="555" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<rect x="424" y="590" width="190" height="164" fill="url(#p25y)"/>
+<text x="26" y="666" fill="#000000" font-size="94" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">23</text>
+<circle cx="154.67999999999998" cy="618.3733333333333" r="15.040000000000001" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="26" y="712" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Clear</text>
+<text x="26" y="754" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">Feels 21</text>
+<circle cx="138" cy="742.3333333333334" r="4" fill="none" stroke="#000000" stroke-width="2"/>
+<circle cx="155" cy="748" r="3" fill="#000000"/>
+<line x1="171" y1="742" x2="189" y2="742" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="171" y1="749" x2="193" y2="749" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+<text x="199" y="754" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">18 km/h</text>
+<circle cx="307" cy="748" r="3" fill="#000000"/>
+<path d="M 329 736 l 6 10 a 7 7 0 1 1 -12 0 Z" fill="#000000"/>
+<text x="341" y="754" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">45%</text>
+<circle cx="519" cy="674" r="39.81600000000001" fill="#000000"/>
+<line x1="573.0360000000001" y1="674" x2="590.1" y2="674" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="557.2092220281963" y1="712.2092220281963" x2="569.2752921423636" y2="724.2752921423636" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="519" y1="728.0360000000001" x2="519" y2="745.1" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="480.7907779718037" y1="712.2092220281963" x2="468.7247078576365" y2="724.2752921423636" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="464.964" y1="674" x2="447.9" y2="674" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="480.7907779718037" y1="635.7907779718037" x2="468.7247078576365" y2="623.7247078576364" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="519" y1="619.9639999999999" x2="519" y2="602.9" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="557.2092220281963" y1="635.7907779718037" x2="569.2752921423635" y2="623.7247078576364" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<rect x="26" y="784" width="588" height="26" fill="#000000"/>
+<text x="40" y="802" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">FORECAST</text>
+<text x="600" y="802" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">HIGH / LOW</text>
+<rect x="28" y="814" width="143" height="102" fill="url(#p25y)"/>
+<text x="99.5" y="840" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">Today</text>
+<ellipse cx="99.5" cy="870" rx="16.8" ry="10.08" fill="#000000"/>
+<circle cx="91.1" cy="865.8" r="8.4" fill="#000000"/>
+<circle cx="106.22" cy="864.12" r="10.08" fill="#000000"/>
+<text x="57.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">25</text>
+<circle cx="90.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="112.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">15</text>
+<circle cx="143.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<rect x="44" y="918" width="111" height="1" fill="#000000"/>
+<rect x="44" y="915" width="49.708695652173915" height="7" fill="#000000"/>
+<rect x="173" y="822" width="1" height="92" fill="#000000"/>
+<text x="246.5" y="840" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">Wed</text>
+<circle cx="246.5" cy="870" r="10.584000000000001" fill="#000000"/>
+<line x1="260.864" y1="870" x2="265.4" y2="870" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="256.6568818049636" y1="880.1568818049635" x2="259.86431816442575" y2="883.3643181644258" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="246.5" y1="884.364" x2="246.5" y2="888.9" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="236.34311819503642" y1="880.1568818049635" x2="233.13568183557425" y2="883.3643181644258" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="232.136" y1="870" x2="227.6" y2="870" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="236.34311819503642" y1="859.8431181950365" x2="233.13568183557425" y2="856.6356818355742" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="246.5" y1="855.636" x2="246.5" y2="851.1" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="256.6568818049636" y1="859.8431181950365" x2="259.86431816442575" y2="856.6356818355742" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<text x="204.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">33</text>
+<circle cx="237.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="259.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">17</text>
+<circle cx="290.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<rect x="191" y="918" width="111" height="1" fill="#000000"/>
+<rect x="199.68695652173915" y="915" width="76.25217391304346" height="7" fill="#000000"/>
+<rect x="320" y="822" width="1" height="92" fill="#000000"/>
+<text x="393.5" y="840" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">Thu</text>
+<circle cx="386.78" cy="864.96" r="7.291200000000001" fill="#FFFF00"/>
+<line x1="396.67519999999996" y1="864.96" x2="399.79999999999995" y2="864.96" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="393.7769630211971" y1="871.9569630211971" x2="395.98653029104884" y2="874.1665302910488" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="386.78" y1="874.8552000000001" x2="386.78" y2="877.98" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="379.78303697880284" y1="871.9569630211971" x2="377.5734697089511" y2="874.1665302910488" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="376.8848" y1="864.96" x2="373.76" y2="864.96" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="379.78303697880284" y1="857.963036978803" x2="377.5734697089511" y2="855.7534697089512" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="386.78" y1="855.0648" x2="386.78" y2="851.94" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<line x1="393.7769630211971" y1="857.963036978803" x2="395.98653029104884" y2="855.7534697089512" stroke="#FFFF00" stroke-width="2" stroke-linecap="round"/>
+<ellipse cx="393.5" cy="872.52" rx="16.8" ry="10.08" fill="#000000"/>
+<circle cx="385.1" cy="868.3199999999999" r="8.4" fill="#000000"/>
+<circle cx="400.22" cy="866.64" r="10.08" fill="#000000"/>
+<text x="351.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">38</text>
+<circle cx="384.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="406.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">18</text>
+<circle cx="437.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<rect x="338" y="918" width="111" height="1" fill="#000000"/>
+<rect x="353.9260869565218" y="915" width="95.07391304347823" height="7" fill="#000000"/>
+<rect x="467" y="822" width="1" height="92" fill="#000000"/>
+<text x="540.5" y="840" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">Fri</text>
+<ellipse cx="540.5" cy="870" rx="16.8" ry="10.08" fill="#000000"/>
+<circle cx="532.1" cy="865.8" r="8.4" fill="#000000"/>
+<circle cx="547.22" cy="864.12" r="10.08" fill="#000000"/>
+<text x="498.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">28</text>
+<circle cx="531.9400000000002" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="553.66" y="906" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">22</text>
+<circle cx="584.94" cy="893.84" r="3.84" fill="none" stroke="#000000" stroke-width="2"/>
+<rect x="485" y="918" width="111" height="1" fill="#000000"/>
+<rect x="516.3695652173913" y="915" width="29.43913043478267" height="7" fill="#000000"/>
+<rect x="26" y="930" width="588" height="2" fill="#000000"/>
+<text x="26" y="952" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">Updated 18:20</text>
+<text x="614" y="952" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">Open-Meteo / RealTimeTrains</text>
+</svg>

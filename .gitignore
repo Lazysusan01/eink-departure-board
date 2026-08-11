@@ -1,0 +1,12 @@
+.pio/
+.vscode/
+.venv/
+piovenv/
+
+# Secrets live here, injected as -D defines at build time by
+# scripts/load_env.py. include/config.h holds only placeholders, so it stays
+# tracked and this file never is. `.env.example` is the tracked template.
+.env
+
+# Scratch captures of API responses, kept while debugging the parser.
+rtt_sample.json
