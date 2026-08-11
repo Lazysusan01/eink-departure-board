@@ -116,7 +116,7 @@
 // --- Layout ----------------------------------------------------------------
 // Portrait, for wall mounting. 1 = ribbon cable on the left, 3 = on the right.
 // If the board comes up upside down, change this to the other value.
-#define DISPLAY_ROTATION   1
+#define DISPLAY_ROTATION   3
 
 // Per station, not in total. The trains panel is split between two stations, so
 // each gets one emphasised row plus four more - roughly two hours ahead at

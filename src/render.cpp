@@ -30,6 +30,16 @@ constexpr int16_t BOARD_H = 960;
 constexpr int16_t MARGIN  = 26;
 constexpr int16_t CONTENT_W = BOARD_W - 2 * MARGIN;
 
+// 3mm of quiet space at the top and bottom edges. The panel puts 960px across
+// roughly 215mm, so it prints about 4.45 px/mm and 3mm is 13px.
+//
+// The sides already had ~6mm from MARGIN; these two edges had none, which is
+// what made the masthead and the footer line look like they ran off the board.
+// Unlike MARGIN this one is a true bleed margin - the masthead's yellow field
+// stops at it rather than running to the edge, so the whole thing reads as a
+// printed sheet with a border rather than as artwork that got cropped.
+constexpr int16_t MARGIN_Y = 13;
+
 // Departures sit directly under the masthead, above the weather. The train is
 // the only thing on this board anyone acts on - the weather you glance at, the
 // 22:09 you either catch or miss - so it gets the top half, where the eye
@@ -45,15 +55,24 @@ constexpr int16_t CONTENT_W = BOARD_W - 2 * MARGIN;
 // API for. The strip was also the weakest panel on the board - it answered
 // "will it be colder at 10pm", a question nobody standing in a hallway with a
 // coat in their hand is asking. Its 170px doubles the departures instead.
-constexpr int16_t HEADER_Y = 0;
+// The 26px the two new edge margins cost comes out of the trains panel, which
+// is the only one with slack: it loses a block height of 244 -> 231, and a row
+// of 36 -> 33, neither of which is visible. Taking it from "now" or the
+// forecast would have meant re-fitting type instead.
+constexpr int16_t HEADER_Y = MARGIN_Y;                 // 13
 constexpr int16_t HEADER_H = 72;
-constexpr int16_t TRAINS_Y = HEADER_Y + HEADER_H;      // 72
-constexpr int16_t TRAINS_H = 506;
-constexpr int16_t NOW_Y    = TRAINS_Y + TRAINS_H;      // 578
+constexpr int16_t TRAINS_Y = HEADER_Y + HEADER_H;      // 85
+constexpr int16_t TRAINS_H = 480;
+constexpr int16_t NOW_Y    = TRAINS_Y + TRAINS_H;      // 565
 constexpr int16_t NOW_H    = 200;
-constexpr int16_t DAILY_Y  = NOW_Y + NOW_H;            // 778
+constexpr int16_t DAILY_Y  = NOW_Y + NOW_H;            // 765
 constexpr int16_t DAILY_H  = 150;
-constexpr int16_t FOOTER_Y = DAILY_Y + DAILY_H;        // 928
+constexpr int16_t FOOTER_Y = DAILY_Y + DAILY_H;        // 915
+constexpr int16_t FOOTER_H = 32;
+
+// 13 + 72 + 480 + 200 + 150 + 32 + 13 = 960.
+static_assert(FOOTER_Y + FOOTER_H + MARGIN_Y == BOARD_H,
+              "panel heights plus both edge margins must total BOARD_H");
 
 constexpr int16_t BAR_H = 26;   // reversed section bar
 
@@ -474,7 +493,7 @@ void drawTrains(Adafruit_GFX& g, const BoardData& data)
     // The panel's height is split evenly rather than by how many departures
     // each station has: a block that moves as services thin out overnight is
     // harder to read at a glance than one that always sits in the same place.
-    // 506 - 18 of gaps, halved: 244 each, which is a bar, a hero and four rows.
+    // 480 - 18 of gaps, halved: 231 each, which is a bar, a hero and four rows.
     constexpr int16_t GAP    = 6;
     const int16_t     blockH = (TRAINS_H - GAP * (MAX_STATIONS + 1)) / MAX_STATIONS;
 

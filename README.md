@@ -289,12 +289,27 @@ with `client.setCACert()` for each host.
 
 | Panel | y | height |
 |---|---|---|
-| Masthead | 0 | 72 |
-| **West Dulwich** | 78 | 244 |
-| **Tulse Hill** | 328 | 244 |
-| Now | 578 | 200 |
-| Forecast | 778 | 150 |
-| Footer | 928 | 32 |
+| *edge margin* | 0 | 13 |
+| Masthead | 13 | 72 |
+| **West Dulwich** | 91 | 231 |
+| **Tulse Hill** | 328 | 231 |
+| Now | 565 | 200 |
+| Forecast | 765 | 150 |
+| Footer | 915 | 32 |
+| *edge margin* | 947 | 13 |
+
+`MARGIN_Y` is 3 mm of quiet space at the top and bottom edges — the panel puts 960 px
+across roughly 215 mm, so it prints about **4.45 px/mm** and 3 mm is 13 px. The sides
+already had ~6 mm from `MARGIN`; these two edges had none, which is what made the masthead
+and the footer line look like they ran off the board. Unlike `MARGIN` it is a true *bleed*
+margin: the masthead's yellow field stops at it rather than running to the edge, so the
+whole thing reads as a printed sheet with a border rather than as artwork that got cropped.
+
+The 26 px it costs comes out of the trains panel, the only one with slack — a block goes
+244 → 231 and a row 36 → 33, neither of which is visible. Taking it from *now* or the
+forecast would have meant re-fitting type instead. A `static_assert` keeps the panel
+heights and both margins summing to `BOARD_H`, so a future edit can't silently overrun the
+bottom of the screen.
 
 Departures sit directly under the masthead rather than at the bottom: the train is the only
 thing on this board anyone acts on — the weather you glance at, the 22:09 you either catch or

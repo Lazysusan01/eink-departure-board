@@ -74,19 +74,30 @@
       <h2>Vertical budget</h2>
       <div class="tblwrap"><table>
         <tr><th>Panel</th><th>y</th><th>h</th></tr>
-        <tr><td>Masthead</td><td>0</td><td>72</td></tr>
-        <tr><td><strong>West Dulwich</strong></td><td>78</td><td>244</td></tr>
-        <tr><td><strong>Tulse Hill</strong></td><td>328</td><td>244</td></tr>
-        <tr><td>Now</td><td>578</td><td>200</td></tr>
-        <tr><td>Forecast</td><td>778</td><td>150</td></tr>
-        <tr><td>Footer</td><td>928</td><td>32</td></tr>
+        <tr><td><em>margin</em></td><td>0</td><td>13</td></tr>
+        <tr><td>Masthead</td><td>13</td><td>72</td></tr>
+        <tr><td><strong>West Dulwich</strong></td><td>91</td><td>231</td></tr>
+        <tr><td><strong>Tulse Hill</strong></td><td>328</td><td>231</td></tr>
+        <tr><td>Now</td><td>565</td><td>200</td></tr>
+        <tr><td>Forecast</td><td>765</td><td>150</td></tr>
+        <tr><td>Footer</td><td>915</td><td>32</td></tr>
+        <tr><td><em>margin</em></td><td>947</td><td>13</td></tr>
       </table></div>
+
+      <h2>3mm at the edges</h2>
+      <p>The sides always had ~6mm from <code>MARGIN</code>; the top and bottom had none,
+         which made the masthead and the footer line look like they ran off the board.
+         13px is 3mm at this panel's ~4.45 px/mm. It is a true bleed margin — the
+         masthead's yellow field stops at it rather than running to the edge — so the
+         board reads as a printed sheet rather than as artwork that got cropped.</p>
+      <p>The 26px it costs comes out of the trains panel, the only one with slack:
+         a block goes 244 → 231 and a row 36 → 33, neither of which is visible.</p>
 
       <h2>Where the hourly strip went</h2>
       <p>There was a temperature curve at y=608 — “next 10 hours”, 170px. It paid for the
          second station: at 159px each, a block held one emphasised departure and two
          rows, under an hour of look-ahead when the fetch already asks the API for two.
-         Each block is now 244px — a hero and up to four rows, the whole window.</p>
+         Each block is now 231px — a hero and up to four rows, the whole window.</p>
       <p>It was also the weakest panel here. “Will it be colder at 10pm” is not a question
          anyone in a hallway holding a coat is asking, and the fetch is cheaper without
          it: those arrays were 96 floats per variable against 4 for a daily one, and
@@ -128,11 +139,13 @@
 // board and this disagree, one of them is a bug rather than a translation.
 // ---------------------------------------------------------------------------
 const W = 640, H = 960, MARGIN = 26, CONTENT_W = W - 2 * MARGIN, BAR_H = 26;
-const HEADER_Y = 0,   HEADER_H = 72;
-const TRAINS_Y = 72,  TRAINS_H = 506;
-const NOW_Y    = 578, NOW_H    = 200;
-const DAILY_Y  = 778, DAILY_H  = 150;
-const FOOTER_Y = 928;
+// 3mm of quiet space top and bottom: the panel prints ~4.45 px/mm, so 13px.
+const MARGIN_Y = 13;
+const HEADER_Y = 13,  HEADER_H = 72;
+const TRAINS_Y = 85,  TRAINS_H = 480;
+const NOW_Y    = 565, NOW_H    = 200;
+const DAILY_Y  = 765, DAILY_H  = 150;
+const FOOTER_Y = 915;
 const MAX_STATIONS = 2;
 
 // GFX point sizes -> px, using the cap-height ratio the fonts actually have.
