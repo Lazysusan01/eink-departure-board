@@ -481,33 +481,27 @@ void drawDepartureRow(Adafruit_GFX& g, const Departure& train, int16_t y, int16_
 // block is self-contained because the two stations are separate decisions -
 // which is also why an unavailable one says so in place rather than blanking
 // the whole panel.
-void drawStationBlock(Adafruit_GFX& g, const StationBoard& board, const char* lastUpdated,
-                      int16_t y, int16_t h)
+void drawStationBlock(Adafruit_GFX& g, const StationBoard& board, int16_t y, int16_t h)
 {
-    // The fetch time belongs *here*, next to the departures, not only in the
-    // footer: the hero's countdown is measured from this moment rather than
-    // from now, so without it "in 12 min" is a number with no epoch. It is
-    // repeated per station because each block is meant to be readable on its
-    // own, and because a station whose fetch failed keeps the stale time it
-    // was last good at.
-    char rightLabel[40];
-    if (lastUpdated && lastUpdated[0]) {
-        snprintf(rightLabel, sizeof(rightLabel), "NORTHBOUND, AS OF %s", lastUpdated);
-    } else {
-        snprintf(rightLabel, sizeof(rightLabel), "NORTHBOUND");
-    }
+    // The fetch time is deliberately *not* repeated here. It was, briefly, on
+    // the reasoning that the hero's countdown is measured from it - but the
+    // masthead already carries it for the whole board, and printing the same
+    // minute three times on one screen reads as a fault rather than as care.
+    // One timestamp, at the top, qualifying everything under it.
+    static const char RIGHT_LABEL[] = "NORTHBOUND";
 
-    // The station name gets whatever the right-hand label leaves, measured
-    // rather than guessed at with a constant - the label's width now varies.
+    // The station name gets whatever the right-hand label leaves. Measured
+    // rather than guessed at with a constant, so changing that label can't
+    // silently start overlapping a long station name.
     g.setFont(&FreeSansBold9pt7b);
     g.setTextSize(1);
-    const int16_t rightW = textWidth(g, rightLabel);
+    const int16_t rightW = textWidth(g, RIGHT_LABEL);
 
     char station[48];
     fitText(g, &FreeSansBold9pt7b, board.name[0] ? board.name : "Station",
             CONTENT_W - 78 - rightW - 24, station, sizeof(station));
 
-    drawSectionBar(g, y, station, rightLabel, 26);
+    drawSectionBar(g, y, station, RIGHT_LABEL, 26);
     drawTrainGlyph(g, MARGIN + 24, y + 13, 22, C_WHITE, C_BLACK);
 
     const int16_t listY = y + 30;
@@ -552,8 +546,7 @@ void drawTrains(Adafruit_GFX& g, const BoardData& data)
     const int16_t     blockH = (TRAINS_H - GAP * (MAX_STATIONS + 1)) / MAX_STATIONS;
 
     for (uint8_t i = 0; i < MAX_STATIONS && i < data.stationCount; i++) {
-        drawStationBlock(g, data.stations[i], data.lastUpdated,
-                         TRAINS_Y + GAP + i * (blockH + GAP), blockH);
+        drawStationBlock(g, data.stations[i], TRAINS_Y + GAP + i * (blockH + GAP), blockH);
     }
 }
 

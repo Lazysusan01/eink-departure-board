@@ -202,10 +202,10 @@ So the hero row leads with the scheduled time at 24 pt, states the expected stat
 keeps the countdown only as a small subordinate line. It is kept at all because
 subtracting one time from another is a genuine chore at a front door.
 
-Each station bar carries **`AS OF hh:mm`**, the moment its departures were fetched. That's
-the epoch the countdown is measured from, so a reader can correct it rather than trust it,
-and a station whose fetch failed keeps the stale time it was last good at. The masthead
-repeats the same timestamp as `Updated hh:mm` for the board as a whole.
+The masthead carries `Updated hh:mm` — one timestamp, for the whole board, qualifying
+every number on it including the countdown. The station bars briefly repeated it as
+`AS OF hh:mm`; the same minute printed three times on one screen reads as a fault rather
+than as care, so there is exactly one.
 
 `MAX_DEPARTURES` is **per station** (5: one emphasised, four rows) — about as many as a
 120-minute window actually returns for a station like Tulse Hill. West Dulwich is

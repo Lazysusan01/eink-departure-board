@@ -18,7 +18,7 @@
 <text x="614" y="71" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">Updated 18:20</text>
 <rect x="26" y="91" width="588" height="26" fill="#000000"/>
 <text x="66" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">West Dulwich</text>
-<text x="600" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND, AS OF 18:20</text>
+<text x="600" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
 <rect x="39" y="94.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
 <rect x="42.08" y="98.06" width="15.84" height="6.1336" fill="#000000"/>
 <circle cx="44.72" cy="109.412" r="1.98" fill="#000000"/>
@@ -45,7 +45,7 @@
 <text x="158" y="304" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
 <rect x="26" y="328" width="588" height="26" fill="#000000"/>
 <text x="66" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Tulse Hill</text>
-<text x="600" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND, AS OF 18:20</text>
+<text x="600" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
 <rect x="39" y="331.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
 <rect x="42.08" y="335.06" width="15.84" height="6.1336" fill="#000000"/>
 <circle cx="44.72" cy="346.412" r="1.98" fill="#000000"/>

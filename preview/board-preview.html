@@ -84,6 +84,12 @@
         <tr><td><em>margin</em></td><td>947</td><td>13</td></tr>
       </table></div>
 
+      <h2>One timestamp, not three</h2>
+      <p>The station bars briefly carried <code>AS OF hh:mm</code> as well, on the grounds
+         that the hero's countdown is measured from it. But the masthead already says it
+         for the whole board, and the same minute printed three times on one screen reads
+         as a fault rather than as care.</p>
+
       <h2>3mm at the edges</h2>
       <p>The sides always had ~6mm from <code>MARGIN</code>; the top and bottom had none,
          which made the masthead and the footer line look like they ran off the board.
@@ -320,9 +326,7 @@ function departureRow(train, y, rowH, shaded) {
 }
 
 function stationBlock(board, y, h) {
-  const rightLabel = data.lastUpdated
-    ? `NORTHBOUND, AS OF ${data.lastUpdated}` : 'NORTHBOUND';
-  sectionBar(y, board.name, rightLabel, 26);
+  sectionBar(y, board.name, 'NORTHBOUND', 26);
   trainGlyph(MARGIN + 24, y + 13, 22, ink.W, ink.K);
 
   const listY = y + 30, listH = h - 34;
