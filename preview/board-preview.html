@@ -281,9 +281,10 @@ function drawHeader() {
   const dayW = text(data.headerDay, F.b24, true, ink.K, MARGIN, HEADER_Y + 48, 'L');
   text(data.headerDate, F.r12, false, ink.K, MARGIN + dayW + 16, HEADER_Y + 48, 'L');
   text(data.place, F.b12, true, ink.K, W - MARGIN, HEADER_Y + 32, 'R');
-  const sun = `${data.now.sunrise} - ${data.now.sunset}`;
-  text(sun, F.r9, false, ink.K, W - MARGIN, HEADER_Y + 58, 'R');
-  sunGlyph(W - MARGIN - measure(sun, F.r9, false) - 18, HEADER_Y + 52, 20, ink.K);
+  // Sunrise/sunset moved down to the weather panel; this slot now says when
+  // the whole board was true, which qualifies every number on it.
+  text(`Updated ${data.lastUpdated || '--:--'}`, F.r9, false, ink.K,
+       W - MARGIN, HEADER_Y + 58, 'R');
 }
 
 function heroDeparture(train, y, h) {
@@ -293,21 +294,20 @@ function heroDeparture(train, y, h) {
   rect(MARGIN, y, 3, h, ink.K);
   rect(W - MARGIN - 3, y, 3, h, ink.K);
 
-  const baseline = y + h / 2 + 9;
-  text(train.sched, F.b18, true, ink.K, MARGIN + 18, baseline, 'L');
+  // Scheduled time dominant, countdown subordinate - see render.cpp.
+  const baseline = y + 42;
+  const timeW = text(train.sched, F.b24, true, ink.K, MARGIN + 18, baseline, 'L');
 
-  let countdownW = 0;
-  if (train.cancelled) {
-    countdownW = text('Cancelled', F.b18, true, ink.R, W - MARGIN - 18, baseline, 'R');
-  } else if (train.away >= 0 && train.away <= 180) {
-    const s = train.away === 0 ? 'due' : `${train.away} min`;
-    countdownW = text(s, F.b18, true, train.delayed ? ink.R : ink.K, W - MARGIN - 18, baseline, 'R');
-  } else {
-    countdownW = text(train.expected, F.b12, true, train.delayed ? ink.R : ink.K,
-                      W - MARGIN - 18, baseline, 'R');
+  const statusColour = (train.cancelled || train.delayed) ? ink.R : ink.K;
+  text(train.expected, F.b18, true, statusColour, W - MARGIN - 18, baseline, 'R');
+
+  if (!train.cancelled && train.away >= 0 && train.away <= 180) {
+    const s = train.away === 0 ? 'due now' : `in ${train.away} min`;
+    text(s, F.b9, true, ink.K, W - MARGIN - 18, y + 62, 'R');
   }
-  const destX = MARGIN + 132;
-  text(train.dest, F.b12, true, ink.K, destX, baseline - 2, 'L');
+
+  const destX = MARGIN + 18 + timeW + 24;
+  text(train.dest, F.b12, true, ink.K, destX, baseline - 4, 'L');
 }
 
 function departureRow(train, y, rowH, shaded) {
@@ -320,14 +320,16 @@ function departureRow(train, y, rowH, shaded) {
 }
 
 function stationBlock(board, y, h) {
-  sectionBar(y, board.name, 'NORTHBOUND', 26);
+  const rightLabel = data.lastUpdated
+    ? `NORTHBOUND, AS OF ${data.lastUpdated}` : 'NORTHBOUND';
+  sectionBar(y, board.name, rightLabel, 26);
   trainGlyph(MARGIN + 24, y + 13, 22, ink.W, ink.K);
 
   const listY = y + 30, listH = h - 34;
   if (!board.ok) { text('Departures unavailable', F.r12, false, ink.R, W/2, listY + listH/2 + 6, 'C'); return; }
   if (!board.departures.length) { text('Nothing northbound', F.r12, false, ink.K, W/2, listY + listH/2 + 6, 'C'); return; }
 
-  const heroH = 60, remaining = board.departures.length - 1;
+  const heroH = 72, remaining = board.departures.length - 1;
   heroDeparture(board.departures[0], listY, heroH);
   if (remaining > 0) {
     const rowH = Math.floor((listH - heroH - 4) / remaining);
@@ -366,7 +368,15 @@ function drawNow() {
   cursor += 20;
   text(`${now.humidity}%`, F.r12, false, ink.K, cursor, statsY, 'L');
 
-  weatherIcon(now.code, W - MARGIN - 95, NOW_Y + 96, 158, now.isDay);
+  const iconCx = W - MARGIN - 95;
+  weatherIcon(now.code, iconCx, NOW_Y + 80, 130, now.isDay);
+
+  if (now.sunrise && now.sunset) {
+    const sun = `${now.sunrise} - ${now.sunset}`;
+    const startX = iconCx - (measure(sun, F.r9, false) + 26) / 2;
+    sunGlyph(startX + 10, NOW_Y + 156, 20, ink.K);
+    text(sun, F.r9, false, ink.K, startX + 26, NOW_Y + 162, 'L');
+  }
 }
 
 function drawDaily() {
@@ -395,9 +405,8 @@ function drawDaily() {
 
 function drawFooter() {
   rect(MARGIN, FOOTER_Y + 2, CONTENT_W, 2, ink.K);
-  const s = `Updated ${data.lastUpdated}`;
-  const w = text(s, F.r9, false, ink.K, MARGIN, FOOTER_Y + 24, 'L');
-  if (data.stale) text('- NOT REFRESHED', F.b9, true, ink.R, MARGIN + w + 12, FOOTER_Y + 24, 'L');
+  if (data.stale) text('NOT REFRESHED - showing the last good board', F.b9, true, ink.R,
+                       MARGIN, FOOTER_Y + 24, 'L');
   text('Open-Meteo / RealTimeTrains', F.r9, false, ink.K, W - MARGIN, FOOTER_Y + 24, 'R');
 }
 

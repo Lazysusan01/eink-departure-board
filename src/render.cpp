@@ -239,13 +239,17 @@ void drawHeader(Adafruit_GFX& g, const BoardData& data)
     drawText(g, &FreeSansBold12pt7b, 1, C_BLACK, BOARD_W - MARGIN, HEADER_Y + 32,
              ALIGN_RIGHT, WEATHER_PLACE);
 
-    if (data.weatherOk && data.now.sunrise[0] && data.now.sunset[0]) {
-        char sun[32];
-        snprintf(sun, sizeof(sun), "%s - %s", data.now.sunrise, data.now.sunset);
-        drawText(g, &FreeSans9pt7b, 1, C_BLACK, BOARD_W - MARGIN, HEADER_Y + 58,
-                 ALIGN_RIGHT, sun);
-        drawSunGlyph(g, BOARD_W - MARGIN - textWidth(g, sun) - 18, HEADER_Y + 52, 20, C_BLACK);
-    }
+    // When the numbers below were true. This sits at the top because it
+    // qualifies the whole board rather than any one panel - everything here is
+    // a snapshot taken at this minute, and on a 10-minute grid that is the
+    // difference between a board being read and a board being trusted.
+    // Sunrise/sunset moved out of this slot and down into the weather panel,
+    // where they belong with the rest of the sky.
+    char updated[32];
+    snprintf(updated, sizeof(updated), "Updated %s",
+             data.lastUpdated[0] ? data.lastUpdated : "--:--");
+    drawText(g, &FreeSans9pt7b, 1, C_BLACK, BOARD_W - MARGIN, HEADER_Y + 58,
+             ALIGN_RIGHT, updated);
 }
 
 void drawNow(Adafruit_GFX& g, const BoardData& data)
@@ -297,7 +301,25 @@ void drawNow(Adafruit_GFX& g, const BoardData& data)
     snprintf(humidity, sizeof(humidity), "%d%%", now.humidity);
     drawText(g, &FreeSans12pt7b, 1, C_BLACK, cursor, statsY, ALIGN_LEFT, humidity);
 
-    drawWeatherIcon(g, now.code, BOARD_W - MARGIN - 95, NOW_Y + 96, 158, now.isDay);
+    // The icon gives up some size so sunrise/sunset can sit under it, inside
+    // the same halftone panel. They belong next to the sky rather than in the
+    // masthead: they are weather, they change slowly, and nobody reads them
+    // first. Grouping them with the icon also means the panel now has a caption
+    // instead of a large empty lower third.
+    const int16_t iconCx = BOARD_W - MARGIN - 95;
+    drawWeatherIcon(g, now.code, iconCx, NOW_Y + 80, 130, now.isDay);
+
+    if (now.sunrise[0] && now.sunset[0]) {
+        char sun[32];
+        snprintf(sun, sizeof(sun), "%s - %s", now.sunrise, now.sunset);
+
+        g.setFont(&FreeSans9pt7b);
+        g.setTextSize(1);
+        const int16_t startX = iconCx - (textWidth(g, sun) + 26) / 2;
+
+        drawSunGlyph(g, startX + 10, NOW_Y + 156, 20, C_BLACK);
+        drawText(g, &FreeSans9pt7b, 1, C_BLACK, startX + 26, NOW_Y + 162, ALIGN_LEFT, sun);
+    }
 }
 
 void drawDaily(Adafruit_GFX& g, const BoardData& data)
@@ -361,6 +383,17 @@ void drawPlatformBadge(Adafruit_GFX& g, int16_t cx, int16_t cy, const char* plat
              cx, cy + (large ? 6 : 5), ALIGN_CENTRE, platform);
 }
 
+// The **scheduled time** is the dominant element here, and the countdown is
+// not, which is a correction rather than a preference. The board redraws once
+// every REFRESH_MINUTES, so "12 min" can be most of that interval out of date
+// by the time anyone reads it - at a 10-minute grid a train shown as 1 minute
+// away may already have gone. "18:20" is true for as long as the board hangs
+// on the wall; "12 min" is true for one instant and decays from there.
+//
+// The countdown is kept, because subtracting a time from another time is a
+// real chore at a front door, but it is now subordinate to both the scheduled
+// time and the expected status - and the station bar above carries the moment
+// it was computed from, so a reader can correct it rather than trust it.
 void drawHeroDeparture(Adafruit_GFX& g, const Departure& train, int16_t y, int16_t h)
 {
     g.fillRect(MARGIN, y, CONTENT_W, h, C_YELLOW);
@@ -369,42 +402,43 @@ void drawHeroDeparture(Adafruit_GFX& g, const Departure& train, int16_t y, int16
     g.fillRect(MARGIN, y, 3, h, C_BLACK);
     g.fillRect(BOARD_W - MARGIN - 3, y, 3, h, C_BLACK);
 
-    const int16_t baseline = y + h / 2 + 9;
+    const int16_t baseline = y + 42;
 
-    drawText(g, &FreeSansBold18pt7b, 1, C_BLACK, MARGIN + 18, baseline, ALIGN_LEFT,
-             train.scheduled);
+    const int16_t timeW = drawText(g, &FreeSansBold24pt7b, 1, C_BLACK, MARGIN + 18, baseline,
+                                   ALIGN_LEFT, train.scheduled);
 
-    // The countdown is the whole reason this row is emphasised - it answers
-    // "do I need to leave now" without any subtraction on the reader's part.
-    int16_t countdownW = 0;
-    if (train.cancelled) {
-        countdownW = drawText(g, &FreeSansBold18pt7b, 1, C_RED, BOARD_W - MARGIN - 18,
-                              baseline, ALIGN_RIGHT, "Cancelled");
-    } else if (train.minutesAway >= 0 && train.minutesAway <= 180) {
+    // Expected status, not a countdown: "On time", a real revised time, or
+    // "Cancelled". Every one of those is still correct an hour later.
+    const uint16_t statusColour = (train.cancelled || train.delayed) ? C_RED : C_BLACK;
+    const int16_t statusW = drawText(g, &FreeSansBold18pt7b, 1, statusColour,
+                                     BOARD_W - MARGIN - 18, baseline, ALIGN_RIGHT,
+                                     train.expected);
+
+    // Only drawn where it means something: a cancelled train has no countdown,
+    // and anything over three hours out reads better as a clock time anyway.
+    if (!train.cancelled && train.minutesAway >= 0 && train.minutesAway <= 180) {
         char countdown[16];
-        if (train.minutesAway == 0) snprintf(countdown, sizeof(countdown), "due");
-        else snprintf(countdown, sizeof(countdown), "%d min", train.minutesAway);
-        countdownW = drawText(g, &FreeSansBold18pt7b, 1,
-                              train.delayed ? C_RED : C_BLACK,
-                              BOARD_W - MARGIN - 18, baseline, ALIGN_RIGHT, countdown);
-    } else {
-        countdownW = drawText(g, &FreeSansBold12pt7b, 1, train.delayed ? C_RED : C_BLACK,
-                              BOARD_W - MARGIN - 18, baseline, ALIGN_RIGHT, train.expected);
+        if (train.minutesAway == 0) snprintf(countdown, sizeof(countdown), "due now");
+        else snprintf(countdown, sizeof(countdown), "in %d min", train.minutesAway);
+        drawText(g, &FreeSansBold9pt7b, 1, C_BLACK, BOARD_W - MARGIN - 18, y + 62,
+                 ALIGN_RIGHT, countdown);
     }
 
-    const int16_t badgeX = BOARD_W - MARGIN - 18 - countdownW - 34;
+    const int16_t badgeX = BOARD_W - MARGIN - 18 - statusW - 34;
     drawPlatformBadge(g, badgeX, y + h / 2, train.platform, true);
 
-    const int16_t destX = MARGIN + 132;
+    // Measured off the time rather than a fixed column: at 24pt the clock is
+    // wide enough that the old constant ran underneath it.
+    const int16_t destX = MARGIN + 18 + timeW + 24;
     char destination[48];
     fitText(g, &FreeSansBold12pt7b, train.destination, badgeX - 24 - destX,
             destination, sizeof(destination));
-    drawText(g, &FreeSansBold12pt7b, 1, C_BLACK, destX, baseline - 2, ALIGN_LEFT, destination);
+    drawText(g, &FreeSansBold12pt7b, 1, C_BLACK, destX, baseline - 4, ALIGN_LEFT, destination);
 
     if (train.cancelled) {
         g.setFont(&FreeSansBold12pt7b);
         g.setTextSize(1);
-        drawThickLine(g, destX, baseline - 9, destX + textWidth(g, destination), baseline - 9,
+        drawThickLine(g, destX, baseline - 11, destX + textWidth(g, destination), baseline - 11,
                       3.0f, C_RED);
     }
 }
@@ -447,13 +481,33 @@ void drawDepartureRow(Adafruit_GFX& g, const Departure& train, int16_t y, int16_
 // block is self-contained because the two stations are separate decisions -
 // which is also why an unavailable one says so in place rather than blanking
 // the whole panel.
-void drawStationBlock(Adafruit_GFX& g, const StationBoard& board, int16_t y, int16_t h)
+void drawStationBlock(Adafruit_GFX& g, const StationBoard& board, const char* lastUpdated,
+                      int16_t y, int16_t h)
 {
+    // The fetch time belongs *here*, next to the departures, not only in the
+    // footer: the hero's countdown is measured from this moment rather than
+    // from now, so without it "in 12 min" is a number with no epoch. It is
+    // repeated per station because each block is meant to be readable on its
+    // own, and because a station whose fetch failed keeps the stale time it
+    // was last good at.
+    char rightLabel[40];
+    if (lastUpdated && lastUpdated[0]) {
+        snprintf(rightLabel, sizeof(rightLabel), "NORTHBOUND, AS OF %s", lastUpdated);
+    } else {
+        snprintf(rightLabel, sizeof(rightLabel), "NORTHBOUND");
+    }
+
+    // The station name gets whatever the right-hand label leaves, measured
+    // rather than guessed at with a constant - the label's width now varies.
+    g.setFont(&FreeSansBold9pt7b);
+    g.setTextSize(1);
+    const int16_t rightW = textWidth(g, rightLabel);
+
     char station[48];
     fitText(g, &FreeSansBold9pt7b, board.name[0] ? board.name : "Station",
-            CONTENT_W - 250, station, sizeof(station));
+            CONTENT_W - 78 - rightW - 24, station, sizeof(station));
 
-    drawSectionBar(g, y, station, "NORTHBOUND", 26);
+    drawSectionBar(g, y, station, rightLabel, 26);
     drawTrainGlyph(g, MARGIN + 24, y + 13, 22, C_WHITE, C_BLACK);
 
     const int16_t listY = y + 30;
@@ -474,7 +528,7 @@ void drawStationBlock(Adafruit_GFX& g, const StationBoard& board, int16_t y, int
     // between however many rows follow, rather than the other way round: the
     // next train is the one thing here worth a fixed, predictable position, and
     // late at night when only two services are left the rows simply get taller.
-    const int16_t heroH     = 60;
+    const int16_t heroH     = 72;
     const int16_t remaining = board.count - 1;
 
     drawHeroDeparture(g, board.departures[0], listY, heroH);
@@ -498,7 +552,8 @@ void drawTrains(Adafruit_GFX& g, const BoardData& data)
     const int16_t     blockH = (TRAINS_H - GAP * (MAX_STATIONS + 1)) / MAX_STATIONS;
 
     for (uint8_t i = 0; i < MAX_STATIONS && i < data.stationCount; i++) {
-        drawStationBlock(g, data.stations[i], TRAINS_Y + GAP + i * (blockH + GAP), blockH);
+        drawStationBlock(g, data.stations[i], data.lastUpdated,
+                         TRAINS_Y + GAP + i * (blockH + GAP), blockH);
     }
 }
 
@@ -506,15 +561,12 @@ void drawFooter(Adafruit_GFX& g, const BoardData& data)
 {
     g.fillRect(MARGIN, FOOTER_Y + 2, CONTENT_W, 2, C_BLACK);
 
-    char updated[48];
-    snprintf(updated, sizeof(updated), "Updated %s",
-             data.lastUpdated[0] ? data.lastUpdated : "--:--");
-    const int16_t w = drawText(g, &FreeSans9pt7b, 1, C_BLACK, MARGIN, FOOTER_Y + 24,
-                               ALIGN_LEFT, updated);
-
+    // The timestamp moved to the masthead, so all this end of the footer has
+    // left to say is whether that timestamp is a lie - which is the half worth
+    // keeping, and worth not burying next to a duplicate of the time itself.
     if (data.stale) {
-        drawText(g, &FreeSansBold9pt7b, 1, C_RED, MARGIN + w + 12, FOOTER_Y + 24, ALIGN_LEFT,
-                 "- NOT REFRESHED");
+        drawText(g, &FreeSansBold9pt7b, 1, C_RED, MARGIN, FOOTER_Y + 24, ALIGN_LEFT,
+                 "NOT REFRESHED - showing the last good board");
     }
 
     drawText(g, &FreeSans9pt7b, 1, C_BLACK, BOARD_W - MARGIN, FOOTER_Y + 24, ALIGN_RIGHT,

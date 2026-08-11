@@ -15,71 +15,64 @@
 <text x="26" y="61" fill="#000000" font-size="47" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Tuesday</text>
 <text x="231" y="61" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">11 August 2026</text>
 <text x="614" y="45" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">West Dulwich</text>
-<text x="614" y="71" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">05:40 - 20:31</text>
-<circle cx="468" cy="65" r="5.6000000000000005" fill="#000000"/>
-<line x1="475.6" y1="65" x2="478" y2="65" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="473.37401153701774" y1="70.37401153701776" x2="475.0710678118655" y2="72.07106781186548" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="468" y1="72.6" x2="468" y2="75" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="462.62598846298226" y1="70.37401153701776" x2="460.9289321881345" y2="72.07106781186548" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="460.4" y1="65" x2="458" y2="65" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="462.62598846298226" y1="59.62598846298224" x2="460.9289321881345" y2="57.928932188134524" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="468" y1="57.4" x2="468" y2="55" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="473.37401153701774" y1="59.625988462982235" x2="475.0710678118655" y2="57.928932188134524" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<text x="614" y="71" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">Updated 18:20</text>
 <rect x="26" y="91" width="588" height="26" fill="#000000"/>
 <text x="66" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">West Dulwich</text>
-<text x="600" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
+<text x="600" y="109" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND, AS OF 18:20</text>
 <rect x="39" y="94.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
 <rect x="42.08" y="98.06" width="15.84" height="6.1336" fill="#000000"/>
 <circle cx="44.72" cy="109.412" r="1.98" fill="#000000"/>
 <circle cx="55.28" cy="109.412" r="1.98" fill="#000000"/>
-<rect x="26" y="121" width="588" height="60" fill="#FFFF00"/>
+<rect x="26" y="121" width="588" height="72" fill="#FFFF00"/>
 <rect x="26" y="121" width="588" height="3" fill="#000000"/>
-<rect x="26" y="178" width="588" height="3" fill="#000000"/>
-<rect x="26" y="121" width="3" height="60" fill="#000000"/>
-<rect x="611" y="121" width="3" height="60" fill="#000000"/>
-<text x="44" y="160" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:20</text>
-<text x="596" y="160" fill="#FF0000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">1 min</text>
-<text x="158" y="158" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Victoria</text>
-<rect x="26" y="185" width="588" height="44" fill="url(#p12k)"/>
-<text x="44" y="214" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:50</text>
-<text x="596" y="214" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="214" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
-<text x="44" y="258" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:20</text>
-<text x="596" y="258" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="258" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
-<rect x="26" y="273" width="588" height="44" fill="url(#p12k)"/>
-<text x="44" y="302" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:50</text>
-<text x="596" y="302" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="302" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<rect x="26" y="190" width="588" height="3" fill="#000000"/>
+<rect x="26" y="121" width="3" height="72" fill="#000000"/>
+<rect x="611" y="121" width="3" height="72" fill="#000000"/>
+<text x="44" y="163" fill="#000000" font-size="47" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:20</text>
+<text x="596" y="163" fill="#FF0000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">18:21</text>
+<text x="596" y="183" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">in 1 min</text>
+<text x="203" y="159" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Victoria</text>
+<rect x="26" y="197" width="588" height="40" fill="url(#p12k)"/>
+<text x="44" y="224" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:50</text>
+<text x="596" y="224" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="224" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<text x="44" y="264" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:20</text>
+<text x="596" y="264" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="264" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
+<rect x="26" y="277" width="588" height="40" fill="url(#p12k)"/>
+<text x="44" y="304" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:50</text>
+<text x="596" y="304" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="304" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Victoria</text>
 <rect x="26" y="328" width="588" height="26" fill="#000000"/>
 <text x="66" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">Tulse Hill</text>
-<text x="600" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND</text>
+<text x="600" y="346" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">NORTHBOUND, AS OF 18:20</text>
 <rect x="39" y="331.98" width="22" height="18.04" rx="3.96" fill="#FFFFFF"/>
 <rect x="42.08" y="335.06" width="15.84" height="6.1336" fill="#000000"/>
 <circle cx="44.72" cy="346.412" r="1.98" fill="#000000"/>
 <circle cx="55.28" cy="346.412" r="1.98" fill="#000000"/>
-<rect x="26" y="358" width="588" height="60" fill="#FFFF00"/>
+<rect x="26" y="358" width="588" height="72" fill="#FFFF00"/>
 <rect x="26" y="358" width="588" height="3" fill="#000000"/>
-<rect x="26" y="415" width="588" height="3" fill="#000000"/>
-<rect x="26" y="358" width="3" height="60" fill="#000000"/>
-<rect x="611" y="358" width="3" height="60" fill="#000000"/>
-<text x="44" y="397" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:32</text>
-<text x="596" y="397" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">12 min</text>
-<text x="158" y="395" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Bridge</text>
-<rect x="26" y="422" width="588" height="33" fill="url(#p12k)"/>
-<text x="44" y="445.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:47</text>
-<text x="596" y="445.5" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="445.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
-<text x="44" y="478.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:02</text>
-<text x="596" y="478.5" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="478.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
-<rect x="26" y="488" width="588" height="33" fill="url(#p12k)"/>
-<text x="44" y="511.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:17</text>
-<text x="596" y="511.5" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="511.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
-<text x="44" y="544.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:32</text>
-<text x="596" y="544.5" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
-<text x="158" y="544.5" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<rect x="26" y="427" width="588" height="3" fill="#000000"/>
+<rect x="26" y="358" width="3" height="72" fill="#000000"/>
+<rect x="611" y="358" width="3" height="72" fill="#000000"/>
+<text x="44" y="400" fill="#000000" font-size="47" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:32</text>
+<text x="596" y="400" fill="#000000" font-size="35" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="596" y="420" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">in 12 min</text>
+<text x="203" y="396" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">London Bridge</text>
+<rect x="26" y="434" width="588" height="30" fill="url(#p12k)"/>
+<text x="44" y="456" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">18:47</text>
+<text x="596" y="456" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="456" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<text x="44" y="486" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:02</text>
+<text x="596" y="486" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="486" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<rect x="26" y="494" width="588" height="30" fill="url(#p12k)"/>
+<text x="44" y="516" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:17</text>
+<text x="596" y="516" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="516" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
+<text x="44" y="546" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">19:32</text>
+<text x="596" y="546" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">On time</text>
+<text x="158" y="546" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">London Bridge</text>
 <rect x="424" y="577" width="190" height="164" fill="url(#p25y)"/>
 <text x="26" y="653" fill="#000000" font-size="94" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">23</text>
 <circle cx="154.67999999999998" cy="605.3733333333333" r="15.040000000000001" fill="none" stroke="#000000" stroke-width="2"/>
@@ -93,15 +86,25 @@
 <circle cx="307" cy="735" r="3" fill="#000000"/>
 <path d="M 329 723 l 6 10 a 7 7 0 1 1 -12 0 Z" fill="#000000"/>
 <text x="341" y="741" fill="#000000" font-size="24" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">45%</text>
-<circle cx="519" cy="661" r="39.81600000000001" fill="#000000"/>
-<line x1="573.0360000000001" y1="661" x2="590.1" y2="661" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="557.2092220281963" y1="699.2092220281963" x2="569.2752921423636" y2="711.2752921423636" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="519" y1="715.0360000000001" x2="519" y2="732.1" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="480.7907779718037" y1="699.2092220281963" x2="468.7247078576365" y2="711.2752921423636" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="464.964" y1="661" x2="447.9" y2="661" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="480.7907779718037" y1="622.7907779718037" x2="468.7247078576365" y2="610.7247078576364" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="519" y1="606.9639999999999" x2="519" y2="589.9" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-<line x1="557.2092220281963" y1="622.7907779718037" x2="569.2752921423635" y2="610.7247078576364" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<circle cx="519" cy="645" r="32.760000000000005" fill="#000000"/>
+<line x1="563.46" y1="645" x2="577.5" y2="645" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="550.4379674915539" y1="676.4379674915539" x2="560.3657466994131" y2="686.365746699413" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="519" y1="689.46" x2="519" y2="703.5" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="487.5620325084461" y1="676.4379674915539" x2="477.634253300587" y2="686.3657466994131" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="474.54" y1="645" x2="460.5" y2="645" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="487.56203250844607" y1="613.5620325084461" x2="477.634253300587" y2="603.634253300587" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="519" y1="600.54" x2="519" y2="586.5" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="550.4379674915539" y1="613.5620325084461" x2="560.365746699413" y2="603.6342533005869" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<circle cx="452" cy="721" r="5.6000000000000005" fill="#000000"/>
+<line x1="459.6" y1="721" x2="462" y2="721" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="457.37401153701774" y1="726.3740115370177" x2="459.0710678118655" y2="728.0710678118654" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="452" y1="728.6" x2="452" y2="731" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="446.62598846298226" y1="726.3740115370177" x2="444.9289321881345" y2="728.0710678118655" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="444.4" y1="721" x2="442" y2="721" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="446.62598846298226" y1="715.6259884629823" x2="444.9289321881345" y2="713.9289321881346" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="452" y1="713.4" x2="452" y2="711" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<line x1="457.37401153701774" y1="715.6259884629823" x2="459.0710678118655" y2="713.9289321881345" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+<text x="468" y="727" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">05:40 - 20:31</text>
 <rect x="26" y="771" width="588" height="26" fill="#000000"/>
 <text x="40" y="789" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="start">FORECAST</text>
 <text x="600" y="789" fill="#FFFFFF" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="end">HIGH / LOW</text>
@@ -165,6 +168,5 @@
 <rect x="485" y="905" width="111" height="1" fill="#000000"/>
 <rect x="516.3695652173913" y="902" width="29.43913043478267" height="7" fill="#000000"/>
 <rect x="26" y="917" width="588" height="2" fill="#000000"/>
-<text x="26" y="939" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="start">Updated 18:20</text>
 <text x="614" y="939" fill="#000000" font-size="18" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" text-anchor="end">Open-Meteo / RealTimeTrains</text>
 </svg>

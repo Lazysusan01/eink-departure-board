@@ -190,6 +190,23 @@ timetable guesswork, but they are a **judgement call**: an unusual terminus (eng
 diversions, late-night short workings) gets filtered out rather than shown. Leave a filter
 empty to show every train in both directions.
 
+### The scheduled time is the big number, not the countdown
+
+The board redraws once every `REFRESH_MINUTES`, so a countdown printed on it can be most
+of that interval out of date by the time anyone reads it — on a 10-minute grid, a train
+shown as "1 min" away may already have gone. **"18:20" is true for as long as the board
+hangs on the wall; "12 min" is true for one instant and decays from there.**
+
+So the hero row leads with the scheduled time at 24 pt, states the expected status next
+("On time", a real revised time, or "Cancelled" — all still correct an hour later), and
+keeps the countdown only as a small subordinate line. It is kept at all because
+subtracting one time from another is a genuine chore at a front door.
+
+Each station bar carries **`AS OF hh:mm`**, the moment its departures were fetched. That's
+the epoch the countdown is measured from, so a reader can correct it rather than trust it,
+and a station whose fetch failed keeps the stale time it was last good at. The masthead
+repeats the same timestamp as `Updated hh:mm` for the board as a whole.
+
 `MAX_DEPARTURES` is **per station** (5: one emphasised, four rows) — about as many as a
 120-minute window actually returns for a station like Tulse Hill. West Dulwich is
 half-hourly, so it often fills four of the five and the rows simply share the height between
