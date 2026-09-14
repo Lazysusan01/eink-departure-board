@@ -82,6 +82,9 @@
 #ifndef STATION_1_FILTER
 #define STATION_1_FILTER  "London Victoria"
 #endif
+#ifndef STATION_1_WINDOW_MINS
+#define STATION_1_WINDOW_MINS 90
+#endif
 
 #ifndef STATION_2_CRS
 #define STATION_2_CRS     "TUH"
@@ -91,6 +94,18 @@
 #endif
 #ifndef STATION_2_FILTER
 #define STATION_2_FILTER  "Bedford|London Bridge|St Pancras|Blackfriars|Luton|Kentish Town"
+#endif
+// Tulse Hill's own request window, smaller than West Dulwich's. It is a
+// Thameslink/Southern core-route stop with six valid northbound termini
+// against West Dulwich's one, so the same window asks RTT for a much bigger
+// service list - and in September 2026 that response started stalling
+// mid-transfer past ~13.6KB (HTTPC_ERROR_READ_TIMEOUT, not a heap or timeout
+// setting - a 25s timeout and a pre-reserved buffer both changed nothing, so
+// something between RTT and this board stops delivering the rest rather
+// than sending it slowly). Asking for less keeps the response under
+// whatever that ceiling is. See trains.cpp.
+#ifndef STATION_2_WINDOW_MINS
+#define STATION_2_WINDOW_MINS 30
 #endif
 
 // --- Refresh behaviour -----------------------------------------------------
@@ -141,7 +156,7 @@
 #define DISPLAY_ROTATION   3
 
 // Per station, not in total. The trains panel is split between two stations, so
-// each gets one emphasised row plus four more - roughly two hours ahead at
-// these frequencies, which is the whole RTT_WINDOW_MINS the fetch asks for.
+// each gets one emphasised row plus four more - see STATION_1/2_WINDOW_MINS
+// above for how far ahead each station's request looks to fill this.
 #define MAX_DEPARTURES     5
 #define FORECAST_DAYS      4              // columns in the day forecast
