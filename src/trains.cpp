@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
+#include <StreamString.h>
 #include <WiFiClientSecure.h>
 #include <ctype.h>
 #include <string.h>
@@ -30,11 +31,8 @@ namespace {
 
 constexpr char RTT_HOST[] = "https://data.rtt.io";
 
-// Two hours. The default window is 60 minutes, which at these frequencies
-// yields fewer services than the panel has room for; three hours yields a
-// response big enough to truncate when the heap is busy after the weather
-// fetch. Two comfortably fills MAX_DEPARTURES.
-constexpr int RTT_WINDOW_MINS = 120;
+// Each station's timeWindow is per-station, not shared: see
+// STATION_1/2_WINDOW_MINS in config.h for why.
 
 // "2026-08-10T20:39:00" -> "20:39". Returns false if it isn't a timestamp.
 bool isoClock(const char* iso, char* out, size_t outSize)
@@ -177,20 +175,44 @@ void buildFilter(JsonDocument& filter)
 // One station's worth of board. Called once per station with a shared access
 // token, so the two fetches cost one token exchange between them.
 bool fetchStation(const char* accessToken, const char* crs, const char* displayName,
-                  const char* filter, StationBoard& board)
+                  const char* filter, int windowMins, StationBoard& board)
 {
     board.count = 0;
     board.ok    = false;
     snprintf(board.name, sizeof(board.name), "%s", displayName);
 
+    // Reserved *before* the TLS session opens, while the heap is still
+    // whatever the weather fetch and the previous station left it as - not
+    // fragmented yet by this session's own mbedTLS buffers. getString()'s
+    // internal StreamString only reserve()s when Content-Length is known,
+    // which chunked responses (this one is) never send, so without this it
+    // grows one small step at a time *during* the live session, competing
+    // with mbedTLS's own buffers for a contiguous block. When a grow step
+    // loses that fight, getString() discards the write error and just
+    // returns whatever had been appended so far - a silent truncation that
+    // reads as a JSON parse failure with no hint of the real cause. Tulse
+    // Hill (a Thameslink/Southern core-route stop, far busier than West
+    // Dulwich) hit exactly this: truncating at the same byte count
+    // regardless of timeWindow or read timeout, because neither changes
+    // when a mid-session malloc fails.
+    StreamString sstring;
+    if (!sstring.reserve(32768)) {
+        Serial.printf("[trains] %s could not reserve body buffer (heap %u)\n",
+                      crs, ESP.getFreeHeap());
+        return false;
+    }
+
     WiFiClientSecure client;
     client.setInsecure();
 
     String url = String(RTT_HOST) + "/gb-nr/location?code=" + crs +
-                 "&timeWindow=" + String(RTT_WINDOW_MINS);
+                 "&timeWindow=" + String(windowMins);
 
     HTTPClient http;
-    http.setTimeout(12000);
+    // 12s (the original value) was tight for a busy station's full transfer
+    // even once truncation stopped being the failure mode; 25s gives a slow
+    // network more room without the 10-minute wake cycle noticing.
+    http.setTimeout(25000);
     if (!http.begin(client, url)) {
         Serial.printf("[trains] %s begin() failed\n", crs);
         return false;
@@ -204,10 +226,20 @@ bool fetchStation(const char* accessToken, const char* crs, const char* displayN
         return false;
     }
 
-    // getString(), not getStream() - see the note in weather.cpp. This response
-    // is chunked too, and a raw-stream parse silently yields zero services.
-    const String body = http.getString();
+    // writeToStream(), not getString() - see the reserve() note above for why,
+    // and not getStream() either: see the note in weather.cpp, this response
+    // is chunked and a raw-stream parse silently yields zero services.
+    // writeToStream() de-chunks the same way getString() does internally, but
+    // unlike getString() it returns the outcome instead of swallowing it.
+    const int written = http.writeToStream(&sstring);
     http.end();
+
+    if (written < 0) {
+        Serial.printf("[trains] %s body write failed: %d (%d bytes, heap %u)\n",
+                      crs, written, sstring.length(), ESP.getFreeHeap());
+        return false;
+    }
+    const String& body = sstring;
 
     JsonDocument filterDoc;
     buildFilter(filterDoc);
@@ -217,6 +249,9 @@ bool fetchStation(const char* accessToken, const char* crs, const char* displayN
         deserializeJson(doc, body, DeserializationOption::Filter(filterDoc));
 
     if (err) {
+        // The write-failure branch above now catches a truncated body, so
+        // reaching here with a parse error means the full response came
+        // through and genuinely isn't valid JSON.
         Serial.printf("[trains] %s parse failed: %s (%d bytes, heap %u)\n",
                       crs, err.c_str(), body.length(), ESP.getFreeHeap());
         return false;
@@ -308,10 +343,10 @@ bool fetchDepartures(BoardData& data)
     char accessToken[768];
     if (!fetchAccessToken(accessToken, sizeof(accessToken))) return false;
 
-    struct Wanted { const char* crs; const char* name; const char* filter; };
+    struct Wanted { const char* crs; const char* name; const char* filter; int windowMins; };
     static const Wanted wanted[MAX_STATIONS] = {
-        { STATION_1_CRS, STATION_1_NAME, STATION_1_FILTER },
-        { STATION_2_CRS, STATION_2_NAME, STATION_2_FILTER },
+        { STATION_1_CRS, STATION_1_NAME, STATION_1_FILTER, STATION_1_WINDOW_MINS },
+        { STATION_2_CRS, STATION_2_NAME, STATION_2_FILTER, STATION_2_WINDOW_MINS },
     };
 
     data.stationCount = MAX_STATIONS;
@@ -322,7 +357,7 @@ bool fetchDepartures(BoardData& data)
     bool any = false;
     for (uint8_t i = 0; i < MAX_STATIONS; i++) {
         if (fetchStation(accessToken, wanted[i].crs, wanted[i].name, wanted[i].filter,
-                         data.stations[i])) {
+                         wanted[i].windowMins, data.stations[i])) {
             any = true;
         }
     }
